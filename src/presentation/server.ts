@@ -9,6 +9,7 @@ export class Server {
       const date = new Date();
 
       new CheckService().execute("https://cursos.devtalles.com/");
+      // new CheckService().execute("http://localhost:3000/");
     });
   }
 }
