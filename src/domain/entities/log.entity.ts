@@ -16,4 +16,16 @@ export class LogEntity {
     this.message = message;
     this.createdAt = new Date();
   }
+
+  getLevel(): LogSeverityLevel {
+    return this.level;
+  }
+
+  getMessage(): string {
+    return this.message;
+  }
+
+  getCreatedAt(): Date {
+    return this.createdAt;
+  }
 }
