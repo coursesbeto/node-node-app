@@ -26,13 +26,13 @@ export class CheckService implements CheckServiceUseCase {
         throw new Error(`Error on check service ${url}`);
       }
       // llamada a la dependencia para grabar un log
-      this.logRepository.saveLog( new LogEntity(LogSeverityLevel.low, `Service ${ url } is working`) )
+      this.logRepository.saveLog( new LogEntity({level: LogSeverityLevel.low, message: `Service ${ url } is working`, origin: "check-service.ts"}) );
       // llamada a la dependencia / callback
       this.successCallback();
       return true;
     } catch (error) {
       // llamada a la dependencia para grabar un log
-      this.logRepository.saveLog( new LogEntity(LogSeverityLevel.high, `${ url } is down: ${error}`) )
+      this.logRepository.saveLog( new LogEntity({level: LogSeverityLevel.high, message: `${ url } is down: ${error}`, origin: "check-service.ts"}) );
       this.errorCallback(String(error));
       return false;
     }
