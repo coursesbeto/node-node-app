@@ -28,4 +28,18 @@ export class LogEntity {
   getCreatedAt(): Date {
     return this.createdAt;
   }
+
+  setCreatedAt(date: Date): void {
+    this.createdAt = date;
+  }
+
+  static parseJSONToLogEntity = (log: string): LogEntity => {
+    const { level, message, createdAt } = JSON.parse(log);
+
+    const intanceLog = new LogEntity(level, message);
+
+    intanceLog.setCreatedAt(new Date(createdAt));
+
+    return intanceLog;
+  };
 }

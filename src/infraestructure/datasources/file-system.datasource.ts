@@ -45,7 +45,28 @@ export class FileSystemDataSource implements LogDataSource {
     }
   }
 
-  getLogs(severityLevel: LogSeverityLevel): Promise<LogEntity[]> {
-    throw new Error("Method not implemented.");
+  // funcionalidad para obtener los logs desde un archivo y parsear cada log a un LogEntity
+  private getLogsFromFile = (path: string): LogEntity[] => {
+    const stringLogs = fs.readFileSync(path, { encoding: "utf-8" });
+
+    const objectLogs = stringLogs
+      .split("\n")
+      .map(LogEntity.parseJSONToLogEntity);
+    // .map((log) => LogEntity.parseJSONToLogEntity(log)); 
+
+    return objectLogs;
+  };
+
+  async getLogs(severityLevel: LogSeverityLevel): Promise<LogEntity[]> {
+    switch (severityLevel) {
+      case LogSeverityLevel.low:
+        return this.getLogsFromFile(this.allLogsPath);
+      case LogSeverityLevel.medium:
+        return this.getLogsFromFile(this.mediumLogsPath);
+      case LogSeverityLevel.high:
+        return this.getLogsFromFile(this.highLogsPath);
+      default:
+        throw new Error(`${severityLevel} not implemented!`);
+    }
   }
 }
