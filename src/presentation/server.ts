@@ -2,6 +2,7 @@ import { CheckService } from "../domain/use-cases/checks/check-service";
 import { FileSystemDataSource } from "../infraestructure/datasources/file-system.datasource";
 import { LogRepositoryImpl } from "../infraestructure/repositories/log-impl.repository";
 import { CronService } from "./services/cron-service";
+import { EmailService } from "./services/email.service";
 
 // creando la implementacion del repository y pasando el datasource que es la propia implementación
 // de un logDataSource, la implementación es para guardar en fileSystem.
@@ -12,18 +13,28 @@ export class Server {
   static start() {
     console.log("server started...");
 
-    CronService.createJob("*/5 * * * * *", () => {
-      const date = new Date();
+    // CronService.createJob("*/5 * * * * *", () => {
+    //   const date = new Date();
 
-      // aqui se esta haciendo la inyeccion de dependencias de la manera mas sencilla
-      // const url = "https://cursos.devtalles.com/";
-      const url = "http://localhost:3000/";
+    //   // aqui se esta haciendo la inyeccion de dependencias de la manera mas sencilla
+    //   // const url = "https://cursos.devtalles.com/";
+    //   const url = "http://localhost:3000/";
 
-      new CheckService(
-        fileSystemRepository,
-        () => console.log(`${url} is ok`),
-        (error) => console.log(error)
-      ).execute(url);
+    //   new CheckService(
+    //     fileSystemRepository,
+    //     () => console.log(`${url} is ok`),
+    //     (error) => console.log(error)
+    //   ).execute(url);
+    // });
+
+    // instanciando el servicio
+    const emailService = new EmailService();
+    
+    // enviando el correo electronico
+    emailService.sendEmail({
+      to: "l21te0133@teziutlan.tecnm.mx",
+      subject: "logs del sistema",
+      htmlBody: `<h1>Hola a todos ${1 + 1}</h1>`,
     });
   }
 }
