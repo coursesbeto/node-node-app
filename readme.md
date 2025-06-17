@@ -9,3 +9,9 @@ Conceptos:
 
 Tips:
 * Siempre que tengamos un paquete de terceros, usar el patrón adaptador, tener la lógica en un solo archivo para tener flexibilidad de cambiar la funcionalidad esperada facilmente.
+
+
+Configuración de cuenta para correo
+* Ingresar a la configuración de la cuenta de google [Contraseñas de aplicaciones](https://myaccount.google.com/u/0/apppasswords)
+* Definimos un nombre para la app y copiamos el código obtenido en las variables de entorno 'MAILER_SECRET_KEY'
+* También escribimos el correo electronico en las variables de entorno 'MAILER_EMAIL' de la misma cuenta

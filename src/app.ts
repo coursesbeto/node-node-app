@@ -31,5 +31,6 @@ async function Main() {
     throw new Error("PROD must be a boolean string ('true' or 'false')");
   }
 
-  Server.start();
+  // Server.start();
+  console.log({mailerEmail, mailerSecretKey})
 }
