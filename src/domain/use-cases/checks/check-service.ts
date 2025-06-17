@@ -32,7 +32,7 @@ export class CheckService implements CheckServiceUseCase {
       return true;
     } catch (error) {
       // llamada a la dependencia para grabar un log
-      this.logRepository.saveLog( new LogEntity(LogSeverityLevel.high, `${ url } is down`) )
+      this.logRepository.saveLog( new LogEntity(LogSeverityLevel.high, `${ url } is down: ${error}`) )
       this.errorCallback(String(error));
       return false;
     }
