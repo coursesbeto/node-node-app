@@ -31,10 +31,16 @@ export class Server {
     const emailService = new EmailService();
     
     // enviando el correo electronico
-    emailService.sendEmail({
-      to: "l21te0133@teziutlan.tecnm.mx",
-      subject: "logs del sistema",
-      htmlBody: `<h1>Hola a todos ${1 + 1}</h1>`,
-    });
+    // emailService.sendEmail({
+    //   to: "l21te0133@teziutlan.tecnm.mx",
+    //   subject: "logs del sistema",
+    //   htmlBody: `<h1>Hola a todos ${1 + 1}</h1>`,
+    // });
+
+
+    // emailService.sendEmailWithFileSystemLogs([
+    //   "l21te0133@teziutlan.tecnm.mx",
+    //   "hdelacruz1318@pue.conalep.edu.mx"
+    // ]);
   }
 }
